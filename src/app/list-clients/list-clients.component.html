@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document Access Window</title>
+  <link rel="stylesheet" type="text/css"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/sleek-dashboard/dist/assets/css/sleek.min.css">
+</head>
+<style type="text/css">
+  body {
+    background-color: #fff;
+    padding: 40px;
+    padding-top: 100px;
+  }
+
+  .top-information,
+  .bottom-information {
+    padding: 0 20px;
+  }
+</style>
+
+<body>
+  <app-header></app-header>
+  <div class="searchFilter">
+    <div class="search float-left">
+      <mat-paginator (page)="pageChangeEvent($event)" [length]="pageLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+      </mat-paginator>
+    </div>
+    <div class="search float-right">
+      Search: <i class="fa fa-search"></i> <input type="text" name="search" (input)="search($event)" placeholder="Search by name, email or phone">
+      
+  </div>
+  </div>
+  <br />
+  <br />
+  <table id="basic-data-table" class="table nowrap" style="width:100%">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <!-- <th>Upload Date</th> -->
+        <th>View</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let doc of splicedData | search:'clientEmail,clientName,clientMobile':searchKey">
+        <td>{{doc.clientName}}</td>
+        <td>{{doc.clientEmail}}</td>
+        <td>{{doc.clientMobile}}</td>
+        <!-- <td>{{doc.uploadDate}}</td> -->
+        <td><button class="btn btn-success btn-sm" (click)="view(doc.clientEmail)">View</button></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>
